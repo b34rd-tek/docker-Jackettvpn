@@ -6,7 +6,7 @@ Docker container which runs the latest headless Jackett Server while connecting 
 ![alt text][preview]
 
 ## Docker Features
-* Base: Ubuntu 18.04
+* Base: Raspberry Pi Debian - Latest
 * Latest Jackett
 * Size: < 150MB
 * Selectively enable or disable OpenVPN support
