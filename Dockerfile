@@ -1,9 +1,10 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM balenalib/raspberry-pi-debian:latest
+FROM balenalib/raspberrypi4-64-debian:latest
 MAINTAINER b34rd-tek
 
-ENV DEBIAN_FRONTEND noninteractive
+RUN ["cross-build-start"]
+
 ENV XDG_DATA_HOME="/config" \
 XDG_CONFIG_HOME="/config"
 
@@ -14,39 +15,34 @@ RUN usermod -u 99 nobody
 # Make directories
 RUN mkdir -p /blackhole /config/Jackett /etc/jackett
 
-# Update and upgrade
-RUN apt update && apt -y upgrade
-
 #  install required packages
-RUN apt -y install \
-    apt-transport-https \
-    wget \
-    curl \
-    gnupg \
-    sed \
-    openvpn \
-    curl \
-    moreutils \
-    net-tools \
-    dos2unix \
-    kmod \
-    iptables \
-    ipcalc\
-    grep \
-    libunwind8 \
-    icu-devtools \
-    #libcurl4 \
-    liblttng-ust0 \
-    #libssl1.0.0 \
-    libkrb5-3 \
-    zlib1g \
-    tzdata \
-    && apt-get clean \
+RUN install_packages apt-transport-https\
+ wget\
+ curl\
+ gnupg\
+ sed\
+ openvpn\
+ curl\
+ moreutils\
+ net-tools\
+ dos2unix\
+ kmod\
+ iptables\
+ ipcalc\
+ grep\
+ libunwind8\
+ icu-devtools\
+ liblttng-ust0\
+ libkrb5-3\
+ zlib1g\
+ tzdata 
+
+# Cleanup
+RUN  apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \
     /tmp/* \
     /var/tmp/*
-
 
 # Install Jackett
 RUN jackett_latest=$(curl --silent "https://api.github.com/repos/Jackett/Jackett/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
@@ -60,6 +56,8 @@ ADD openvpn/ /etc/openvpn/
 ADD jackett/ /etc/jackett/
 
 RUN chmod +x /etc/jackett/*.sh /etc/jackett/*.init /etc/openvpn/*.sh /opt/Jackett/jackett
+
+RUN ["cross-build-end"]
 
 EXPOSE 9117
 CMD ["/bin/bash", "/etc/openvpn/start.sh"]
