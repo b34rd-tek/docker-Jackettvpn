@@ -1,7 +1,7 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM raspbian/stretch
-MAINTAINER gjeanmart
+FROM balenalib/raspberry-pi-debian:latest
+MAINTAINER b34rd-tek
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_DATA_HOME="/config" \
