@@ -1,7 +1,6 @@
 # Jackett and OpenVPN, JackettVPN
 
 FROM balenalib/raspberrypi4-64-debian:latest
-MAINTAINER b34rd-tek
 
 RUN ["cross-build-start"]
 
