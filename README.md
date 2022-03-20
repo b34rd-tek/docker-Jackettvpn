@@ -6,9 +6,8 @@ Docker container which runs the latest headless Jackett Server while connecting 
 ![alt text][preview]
 
 ## Docker Features
-* Base: Raspberry Pi Debian - Latest
+* Base: balenalib/raspberrypi4-64-debian - Latest
 * Latest Jackett
-* Size: < 150MB
 * Selectively enable or disable OpenVPN support
 * IP tables kill switch to prevent IP leaking when VPN connection fails
 * Specify name servers to add to container
@@ -26,7 +25,7 @@ $ docker run --privileged  -d \
               -e "LAN_NETWORK=192.168.0.0/24" \
               -e "NAME_SERVERS=1.1.1.1,1.0.0.1" \
               -p 9117:9117 \
-              dyonr/jackettvpn
+              b34rdtek/jackettvpn
 ```
 
 # Variables, Volumes, and Ports
@@ -108,5 +107,5 @@ $ docker run --privileged  -d \
               -e "LAN_NETWORK=192.168.0.0/24" \
               -e "NAME_SERVERS=1.1.1.1,1.0.0.1" \
               -p 9117:9117 \
-              dyonr/jackettvpn
+              b34rdtek/jackettvpn
 ```
