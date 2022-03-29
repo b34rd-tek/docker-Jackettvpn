@@ -1,6 +1,6 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM arm64v8/alpine:latest
+FROM alpine:latest
 
 ENV XDG_DATA_HOME="/config" \
 XDG_CONFIG_HOME="/config"
