@@ -1,6 +1,6 @@
 #!/bin/bash
 # Setup docker to build for muliple targets
 
-docker buildx create --name multibuilder --driver-opt network=host --use
-docker buildx inspect --bootstrap
-docker buildx build --platform linux/arm64/v8,linux/amd64 -t ${IMAGE_NAME} --output=type=registry,registry.insecure=true .
+docker buildx create --name multibuilder
+docker buildx use multibuilder
+docker buildx build --platform linux/arm64/v8,linux/amd64 -t ${IMAGE_NAME} --push .
