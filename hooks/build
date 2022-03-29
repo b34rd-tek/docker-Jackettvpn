@@ -1,13 +1,4 @@
 #!/bin/bash
+# Setup docker to build for muliple targets
 
-if [ $DOCKER_TAG == "arm64" ]
-then
-  docker build --platform linux/arm64/v8 . -t ${IMAGE_NAME}
-else
-  if [ $DOCKER_TAG == "amd64" ]
-  then
-    docker build . -t ${IMAGE_NAME}
-  else
-    docker build . -t ${IMAGE_NAME}
-  fi
-fi
+docker buildx build --platform linux/arm64/v8,linux/amd64linux/arm/v6,linux/arm/v7,linux/386,linux/ppc64le,linux/s390x . -t ${IMAGE_NAME}
