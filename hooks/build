@@ -63,27 +63,9 @@ do
     	--build-arg PACKAGE="${GITHUB_USERREPO}" \
         --build-arg DESCRIPTION="${DESCRIPTION}" \
         --build-arg VERSION=$(git describe --tags --always) \
-        -t ${IMAGE_NAME}_${BUILD_ARCH} \
+        -t ${IMAGE_NAME} \
         .
+    docker push ${IMAGE_NAME}
 done
-
-
-## Build the prime image at the end.
-docker build \
-    --file "${DOCKERFILE_PATH}" \
-    --build-arg APPLICATION=${APPLICATION} \
-    --build-arg BUILD_RFC3339=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
-    --build-arg REVISION=$(git rev-parse --short HEAD) \
-  	--build-arg PACKAGE="${GITHUB_USERREPO}" \
-    --build-arg DESCRIPTION="${DESCRIPTION}" \
-    --build-arg VERSION=$(git describe --tags --always) \
-    -t ${IMAGE_NAME}_${DEFAULT_ARCH} \
-    .
-
-## Push the default arch image so manifest-tool can find it
-docker push ${IMAGE_NAME}_${DEFAULT_ARCH}
-
-## Tag the default image so dockerhub can push it.
-docker tag ${IMAGE_NAME}_${DEFAULT_ARCH} ${IMAGE_NAME}
 
 echo "[***] ...build hook complete."
