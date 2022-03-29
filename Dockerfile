@@ -2,15 +2,13 @@
 
 FROM alpine:latest
 
-LABEL org.opencontainers.image.ref.name="${PACKAGE}" \
-      org.opencontainers.image.created=$BUILD_RFC3339 \
-      org.opencontainers.image.authors="b34rd_tek <el_barbado@b34rd.tech>" \
+ARG TARGETARCH
+
+LABEL org.opencontainers.image.authors="b34rd_tek <el_barbado@b34rd.tech>" \
       org.opencontainers.image.documentation="https://github.com/${PACKAGE}/README.md" \
       org.opencontainers.image.description="${DESCRIPTION}" \
       org.opencontainers.image.licenses="GPLv3" \
       org.opencontainers.image.source="https://github.com/${PACKAGE}" \
-      org.opencontainers.image.revision=$REVISION \
-      org.opencontainers.image.version=$VERSION \
       org.opencontainers.image.url="https://hub.docker.com/r/${PACKAGE}/"
 
 ENV XDG_DATA_HOME="/config" \
@@ -44,9 +42,9 @@ RUN mkdir -p /blackhole /config/Jackett /etc/jackett
 
 # Install Jackett
 RUN jackett_latest=$(curl --silent "https://api.github.com/repos/Jackett/Jackett/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
-    && curl -o /opt/Jackett.Binaries.LinuxARM64.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.LinuxARM64.tar.gz \
-    && tar -xvzf /opt/Jackett.Binaries.LinuxARM64.tar.gz \
-    && rm /opt/Jackett.Binaries.LinuxARM64.tar.gz
+    && curl -o /opt/Jackett.Binaries.Linux${TARGETARCH}.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.Linux${TARGETARCH}.tar.gz \
+    && tar -xvzf /opt/Jackett.Binaries.Linux${TARGETARCH}}.tar.gz \
+    && rm /opt/Jackett.Binaries.Linux${TARGETARCH}}.tar.gz
 
 VOLUME /blackhole /config
 
