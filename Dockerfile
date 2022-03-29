@@ -43,8 +43,8 @@ RUN mkdir -p /blackhole /config/Jackett /etc/jackett
 # Install Jackett
 RUN jackett_latest=$(curl --silent "https://api.github.com/repos/Jackett/Jackett/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
     && curl -o /opt/Jackett.Binaries.Linux${TARGETARCH}.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.Linux${TARGETARCH}.tar.gz \
-    && tar -xvzf /opt/Jackett.Binaries.Linux${TARGETARCH}}.tar.gz \
-    && rm /opt/Jackett.Binaries.Linux${TARGETARCH}}.tar.gz
+    && tar -xvzf /opt/Jackett.Binaries.Linux${TARGETARCH}.tar.gz \
+    && rm /opt/Jackett.Binaries.Linux${TARGETARCH}.tar.gz
 
 VOLUME /blackhole /config
 
