@@ -2,4 +2,4 @@
 
 docker buildx create --name mybuilder
 docker buildx use mybuilder
-docker buildx build --platform linux/amd64,linux/arm64v8,linux/arm/v7 -t ${IMAGE_NAME}
+docker buildx build --platform linux/amd64,linux/arm64v8,linux/arm/v7 -t ${IMAGE_NAME} .
