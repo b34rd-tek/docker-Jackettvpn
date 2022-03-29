@@ -2,12 +2,12 @@
 
 if [ $DOCKER_TAG == "arm64" ]
 then
-  docker build . --build-arg --plaform linux/arm64/v8 -t ${IMAGE_NAME}
+  docker build . --plaform linux/arm64/v8 -t ${IMAGE_NAME}
 else
   if [ $DOCKER_TAG == "amd64" ]
   then
-    docker build . --build-arg -t ${IMAGE_NAME}
+    docker build . -t ${IMAGE_NAME}
   else
-    docker build . --build-arg -t ${IMAGE_NAME}
+    docker build . -t ${IMAGE_NAME}
   fi
 fi
