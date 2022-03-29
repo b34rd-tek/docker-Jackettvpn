@@ -42,10 +42,16 @@ RUN mkdir -p /blackhole /config/Jackett /etc/jackett
 
 # Install Jackett
 RUN jackett_latest=$(curl --silent "https://api.github.com/repos/Jackett/Jackett/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') \
-    && curl -o /opt/Jackett.Binaries.Linux${TARGETARCH}.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.Linux${TARGETARCH}.tar.gz \
-    && tar -xvzf /opt/Jackett.Binaries.Linux${TARGETARCH}.tar.gz \
-    && rm /opt/Jackett.Binaries.Linux${TARGETARCH}.tar.gz
-
+    && if [ "$TARGETARCH" = "arm64" ]; then curl -o /opt/Jackett.Binaries.LinuxARM64.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.LinuxARM64.tar.gz \
+    && tar -xvzf /opt/Jackett.Binaries.LinuxARM64.tar.gz \
+    && rm /opt/Jackett.Binaries.LinuxARM64.tar.gz ; else \
+    if [ "$TARGETARCH" = "amd64" ]; then curl -o /opt/Jackett.Binaries.LinuxAMDx64.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.LinuxAMDx64.tar.gz \
+    && tar -xvzf /opt/Jackett.Binaries.LinuxAMDx64.tar.gz \
+    && rm /opt/Jackett.Binaries.LinuxAMDx64.tar.gz ; else \
+    curl -o /opt/Jackett.Binaries.LinuxARM32.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jackett_latest/Jackett.Binaries.LinuxARM32.tar.gz \
+    && tar -xvzf /opt/Jackett.Binaries.LinuxARM32.tar.gz \
+    && rm /opt/Jackett.Binaries.LinuxARM32.tar.gz; fi; fi
+    
 VOLUME /blackhole /config
 
 ADD openvpn/ /etc/openvpn/
