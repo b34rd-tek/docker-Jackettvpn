@@ -1,8 +1,8 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM arm64v8/alpine:latest
+FROM arm32v7/alpine:latest
 
-COPY qemu-aarch64-static /usr/bin/
+COPY qemu-arm-static /usr/bin/
 
 LABEL org.opencontainers.image.ref.name="${PACKAGE}" \
       org.opencontainers.image.created=$BUILD_RFC3339 \
