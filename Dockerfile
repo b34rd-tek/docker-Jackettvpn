@@ -1,6 +1,6 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM alpine:latest
+FROM alpine:3.15.3
 
 LABEL org.opencontainers.image.authors="b34rd_tek <el_barbado@b34rd.tech>" \
       org.opencontainers.image.documentation="https://github.com/${PACKAGE}/README.md" \
