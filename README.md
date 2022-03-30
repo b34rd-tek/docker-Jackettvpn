@@ -25,7 +25,7 @@ $ docker run --privileged  -d \
               -e "LAN_NETWORK=192.168.0.0/24" \
               -e "NAME_SERVERS=1.1.1.1,1.0.0.1" \
               -p 9117:9117 \
-              b34rdtek/jackettvpn
+              b34rdtek/jackettopenvpn
 ```
 
 # Variables, Volumes, and Ports
@@ -107,5 +107,5 @@ $ docker run --privileged  -d \
               -e "LAN_NETWORK=192.168.0.0/24" \
               -e "NAME_SERVERS=1.1.1.1,1.0.0.1" \
               -p 9117:9117 \
-              b34rdtek/jackettvpn
+              b34rdtek/jackettopenvpn
 ```
