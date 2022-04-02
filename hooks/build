@@ -1,4 +1,4 @@
 #!/bin/bash
 
 docker buildx create --use
-docker buildx build --push --platform linux/amd64 --tag ${IMAGE_NAME} .
+docker buildx build --push --platform linux/amd64,linux/arm64,linux/armhf --tag ${IMAGE_NAME} .
