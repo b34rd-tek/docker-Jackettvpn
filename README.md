@@ -1,4 +1,4 @@
-[![ci](https://github.com/b34rd-tek/jackettopenvpn/actions/workflows/docker.yml/badge.svg)](https://github.com/b34rd-tek/jackettopenvpn/actions/workflows/docker.yml)  [![build](https://github.com/b34rd-tek/jackettopenvpn/actions/workflows/trivy.yml/badge.svg)](https://github.com/b34rd-tek/jackettopenvpn/actions/workflows/trivy.yml)  
+[![ci](https://github.com/b34rd-tek/jackettopenvpn/actions/workflows/docker.yml/badge.svg)](https://github.com/b34rd-tek/jackettopenvpn/actions/workflows/docker.yml)  [![build](https://github.com/b34rd-tek/jackettopenvpn/actions/workflows/trivy.yml/badge.svg)](https://github.com/b34rd-tek/jackettopenvpn/actions/workflows/trivy.yml)  [![Docker Pulls](https://img.shields.io/docker/pulls/b34rdtek/jackettopenvpn.svg)](https://hub.docker.com/r/b34rdtek/jackettopenvpn/)
 
 [preview]: https://raw.githubusercontent.com/DyonR/docker-templates/master/Screenshots/jackettvpn/jackettvpn-mainpage.png "Jackett Preview"
 
