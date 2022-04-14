@@ -37,7 +37,7 @@ RUN apk update && apk add wget\
  tzdata
 
 # Make directories
-RUN mkdir -p /blackhole /config/Jackett /etc/jackett
+RUN mkdir -p /blackhole /config/Jackett /etc/jackett /lib/lsb
 
 ARG TARGETARCH
 ENV JACKETT_ARCH=LinuxAMDx64
@@ -57,6 +57,7 @@ VOLUME /blackhole /config
 
 ADD openvpn/ /etc/openvpn/
 ADD jackett/ /etc/jackett/
+ADD lsb/ /lib/lsb
 
 RUN chmod +x /etc/jackett/*.sh /etc/jackett/*.init /etc/openvpn/*.sh /opt/Jackett/jackett
 
