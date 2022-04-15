@@ -1,6 +1,6 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM alpine:latest
+FROM ubuntu:latest
 
 LABEL org.opencontainers.image.authors="b34rd_tek <el_barbado@b34rd.tech>" \
       org.opencontainers.image.documentation="https://github.com/${PACKAGE}/README.md" \
@@ -9,31 +9,46 @@ LABEL org.opencontainers.image.authors="b34rd_tek <el_barbado@b34rd.tech>" \
       org.opencontainers.image.source="https://github.com/${PACKAGE}" \
       org.opencontainers.image.url="https://hub.docker.com/r/${PACKAGE}/"
 
+ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_DATA_HOME="/config" \
 XDG_CONFIG_HOME="/config"
 
 WORKDIR /opt
 
+RUN usermod -u 99 nobody
+
+# Update and upgrade
+RUN apt update && apt -y upgrade
+
 #  install required packages
-RUN apk update && apk add wget\
- bash\
- curl\
- gnupg\
- sed\
- openvpn\
- moreutils\
- net-tools\
- dos2unix\
- kmod\
- iptables\
- ipcalc\
- grep\
- libunwind\
- icu-dev\
- lttng-ust\
- krb5-libs\
- zlib\
- tzdata
+RUN apt -y install \
+    apt-transport-https \
+    wget \
+    curl \
+    gnupg \
+    sed \
+    openvpn \
+    curl \
+    moreutils \
+    net-tools \
+    dos2unix \
+    kmod \
+    iptables \
+    ipcalc\
+    grep \
+    libunwind8 \
+    icu-devtools \
+    #libcurl4 \
+    liblttng-ust0 \
+    #libssl1.0.0 \
+    libkrb5-3 \
+    zlib1g \
+    tzdata \
+    && apt-get clean \
+    && rm -rf \
+    /var/lib/apt/lists/* \
+    /tmp/* \
+    /var/tmp/*
 
 # Make directories
 RUN mkdir -p /blackhole /config/Jackett /etc/jackett /lib/lsb /lib/init
@@ -57,7 +72,7 @@ VOLUME /blackhole /config
 ADD openvpn/ /etc/openvpn/
 ADD jackett/ /etc/jackett/
 
-RUN chmod +x /etc/jackett/*.sh /etc/openvpn/*.sh /opt/Jackett/jackett
+RUN chmod +x /etc/jackett/*.sh /etc/jackett/*.init /etc/openvpn/*.sh /opt/Jackett/jackett
 
 EXPOSE 9117
-CMD ["/bin/sh", "/etc/openvpn/start.sh"]
+CMD ["/bin/bash", "/etc/openvpn/start.sh"]
