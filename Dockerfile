@@ -16,7 +16,6 @@ WORKDIR /opt
 
 #  install required packages
 RUN apk update && apk add wget\
- openrc\
  bash\
  curl\
  gnupg\
