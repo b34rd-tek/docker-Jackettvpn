@@ -8,7 +8,7 @@ Docker container which runs the latest headless Jackett Server while connecting 
 ![alt text][preview]
 
 ## Docker Features
-* Base: balenalib/raspberrypi4-64-debian - Latest
+* Base: ubuntu - Latest
 * Latest Jackett
 * Selectively enable or disable OpenVPN support
 * IP tables kill switch to prevent IP leaking when VPN connection fails

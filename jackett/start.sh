@@ -18,7 +18,7 @@ if [ $? -eq 0 ]; then
    echo "A group with PGID $PGID already exists in /etc/passwd, nothing to do."
 else
    echo "A group with PGID $PGID does not exist, adding a group called 'jackett' with PGID $PGID"
-   addgroup -g $PGID jackett
+   groupadd -g $PGID jackett
 fi
 
 # Check for missing User / PUID
@@ -27,7 +27,7 @@ if [ $? -eq 0 ]; then
    echo "An user with PUID $PUID already exists in /etc/passwd, nothing to do."
 else
    echo "An user with PUID $PUID does not exist, adding an user called 'jackett user' with PUID $PUID"
-   adduser -u $PUID -G jackett -D jackett
+   useradd -c "jackett user" -g $PGID -u $PUID jackett
 fi
 
 # Set umask
