@@ -57,8 +57,6 @@ VOLUME /blackhole /config
 
 ADD openvpn/ /etc/openvpn/
 ADD jackett/ /etc/jackett/
-ADD lsb/ /lib/lsb/
-ADD init/ /lib/init/
 
 RUN chmod +x /etc/jackett/*.sh /etc/jackett/*.init /etc/openvpn/*.sh /opt/Jackett/jackett
 
