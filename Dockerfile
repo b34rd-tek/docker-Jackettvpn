@@ -57,10 +57,10 @@ VOLUME /blackhole /config
 
 ADD openvpn/ /etc/openvpn/
 ADD jackett/ /etc/jackett/
-ADD lsb/ /lib/lsb
-ADD init/ /lib/init
+ADD lsb/ /lib/lsb/
+ADD init/ /lib/init/
 
 RUN chmod +x /etc/jackett/*.sh /etc/jackett/*.init /etc/openvpn/*.sh /opt/Jackett/jackett
 
 EXPOSE 9117
-CMD ["/bin/bash", "/etc/openvpn/start.sh"]
+CMD ["/bin/sh", "/etc/openvpn/start.sh"]

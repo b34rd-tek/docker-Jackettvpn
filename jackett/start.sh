@@ -56,7 +56,7 @@ if [ ! -z "${WEBUI_PORT}" ]; then
 fi
 
 echo "[info] Starting Jackett daemon..." | ts '%Y-%m-%d %H:%M:%.S'
-/bin/bash /etc/jackett/jackett.init start &
+/bin/bash /opt/Jackett/jackett --NoRestart --NoUpdates &
 chmod -R 755 /config/Jackett
 
 sleep 1
