@@ -39,7 +39,7 @@ RUN apt -y install \
     libunwind8 \
     icu-devtools \
     #libcurl4 \
-    liblttng-ust0 \
+    liblttng-ust1 \
     #libssl1.0.0 \
     libkrb5-3 \
     zlib1g \
