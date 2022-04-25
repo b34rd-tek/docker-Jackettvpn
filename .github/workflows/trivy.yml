@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Analysis
+name: build
 
 on:
   push:
@@ -33,13 +33,22 @@ jobs:
           docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@2a2157eb22c08c9a1fac99263430307b8d1bc7a2
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH, MEDIUM, LOW'
+          severity: 'CRITICAL, HIGH, MEDIUM, LOW'
+          
+      - name: Run Trivy vulnerability scanner in Repo momde
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          ignnore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL, HIGH, MEDIUM, LOW'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
