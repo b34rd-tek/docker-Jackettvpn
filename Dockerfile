@@ -1,6 +1,6 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 LABEL org.opencontainers.image.authors="b34rd_tek <el_barbado@b34rd.tech>" \
       org.opencontainers.image.documentation="https://github.com/${PACKAGE}/README.md" \
@@ -38,8 +38,9 @@ RUN apt -y install \
     grep \
     libunwind8 \
     icu-devtools \
+    liblttng-ust0 \
     #libcurl4 \
-    liblttng-ust1 \
+    #liblttng-ust1 \
     #libssl1.0.0 \
     libkrb5-3 \
     zlib1g \
