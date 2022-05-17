@@ -1,0 +1,57 @@
+# This workflow performs Static Code Analysis, and Secrets checks. All findings are reported as issues.
+# If a pull request triggers action findings will be reported as comments on the PR.
+
+name: Vulnerability Scanning
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 7 * * *'
+  push:
+    branches:
+      - main
+  pull_request:
+  
+jobs:
+  build:
+    name: Vulnerability Scanning
+    runs-on: ubuntu-18.04
+    steps:
+    
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Run Trivy scanner in infrastructure as code mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
+          hide-progress: false
+          format: 'json'
+          output: 'result-iac.json'
+
+      - uses: chili-piper/trivy-report-issue-action@v1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          input-filename: "result-iac.json"
+          label: 'vulnerability'
+          assignee: ''
+          project-id: ''
+          
+      - name: Run Trivy scanner in secrets and repo mode.
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
+          format: 'json'
+          output: 'result-fs.json'
+
+      - uses: chili-piper/trivy-report-issue-action@v1.1
+          token: ${{ secrets.GITHUB_TOKEN }}
+          input-filename: "result-fs.json"
+          label: 'vulnerability'
+          assignee: ''
+          project-id: ''
+
