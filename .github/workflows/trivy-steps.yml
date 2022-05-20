@@ -68,7 +68,7 @@ jobs:
 
       - name: Create Summary
         run: |
-          echo '## Trivy Scan Summary:' >> $GITHUB_STEP_SUMMARY
+          echo '## Trivy Repo Scan Summary:' >> $GITHUB_STEP_SUMMARY
           echo -n "Scan completed successfully at: " >> $GITHUB_STEP_SUMMARY
           date >> $GITHUB_STEP_SUMMARY
           [ -s results.tbl ] &&
@@ -87,7 +87,7 @@ jobs:
 
       - name: Create Summary
         run: |
-          echo '## Trivy Scan Summary:' >> $GITHUB_STEP_SUMMARY
+          echo '## Trivy IaC Scan Summary:' >> $GITHUB_STEP_SUMMARY
           echo -n "Scan completed successfully at: " >> $GITHUB_STEP_SUMMARY
           date >> $GITHUB_STEP_SUMMARY
           [ -s results.tbl ] &&
