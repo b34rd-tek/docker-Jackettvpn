@@ -6,21 +6,21 @@ name: Vulnerability Scanning
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 7 * * *'
+    - cron: '0 4 * * 1'
   push:
     branches:
-      - master
+      - main
   pull_request:
-  
+
 jobs:
   build:
     name: Vulnerability Scanning
     runs-on: ubuntu-18.04
     steps:
-    
+
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Run Trivy scanner in infrastructure as code mode
         uses: aquasecurity/trivy-action@master
         with:
@@ -38,7 +38,7 @@ jobs:
           label: 'vulnerability'
           assignee: ''
           project-id: ''
-          
+
       - name: Run Trivy scanner in secrets and repo mode.
         uses: aquasecurity/trivy-action@master
         with:
@@ -49,9 +49,9 @@ jobs:
           output: 'result-fs.json'
 
       - uses: chili-piper/trivy-report-issue-action@v1.1
+        with:
           token: ${{ secrets.GITHUB_TOKEN }}
           input-filename: "result-fs.json"
           label: 'vulnerability'
           assignee: ''
           project-id: ''
-
