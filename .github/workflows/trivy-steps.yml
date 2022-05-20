@@ -71,7 +71,7 @@ jobs:
           echo '## Trivy Repo Scan Summary:' >> $GITHUB_STEP_SUMMARY
           echo -n "Scan completed successfully at: " >> $GITHUB_STEP_SUMMARY
           date >> $GITHUB_STEP_SUMMARY
-          [ -s results.tbl ] &&
+          [ -s result.tbl ] &&
           echo '```shell' >> $GITHUB_STEP_SUMMARY && cat result.tbl >> $GITHUB_STEP_SUMMARY && echo '```' >> $GITHUB_STEP_SUMMARY ||
           echo "Trivy found 0 vulnerabilities." >> $GITHUB_STEP_SUMMARY
           
@@ -90,6 +90,6 @@ jobs:
           echo '## Trivy IaC Scan Summary:' >> $GITHUB_STEP_SUMMARY
           echo -n "Scan completed successfully at: " >> $GITHUB_STEP_SUMMARY
           date >> $GITHUB_STEP_SUMMARY
-          [ -s results.tbl ] &&
+          [ -s result.tbl ] &&
           echo '```shell' >> $GITHUB_STEP_SUMMARY && cat result.tbl >> $GITHUB_STEP_SUMMARY && echo '```' >> $GITHUB_STEP_SUMMARY ||
           echo "Trivy found 0 vulnerabilities." >> $GITHUB_STEP_SUMMARY
