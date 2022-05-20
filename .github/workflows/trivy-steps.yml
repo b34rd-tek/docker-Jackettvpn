@@ -62,6 +62,7 @@ jobs:
           scan-type: 'config'
           severity: 'HIGH,CRITICAL'
           ignore-unfixed: true
+          hide-progress: false
           format: 'table'
           output: 'result.tbl'
 
