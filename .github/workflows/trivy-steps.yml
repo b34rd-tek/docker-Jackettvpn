@@ -59,6 +59,25 @@ jobs:
       - name: Generate findings table for action summary
         uses: aquasecurity/trivy-action@master
         with:
+          scan-type: 'fs'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
+          hide-progress: false
+          format: 'table'
+          output: 'result.tbl'
+
+      - name: Create Summary
+        run: |
+          echo '## Trivy Scan Summary:' >> $GITHUB_STEP_SUMMARY
+          echo -n "Scan completed successfully at: " >> $GITHUB_STEP_SUMMARY
+          date >> $GITHUB_STEP_SUMMARY
+          [ -s results.tbl ] &&
+          echo '```shell' >> $GITHUB_STEP_SUMMARY && cat result.tbl >> $GITHUB_STEP_SUMMARY && echo '```' >> $GITHUB_STEP_SUMMARY ||
+          echo "Trivy found 0 vulnerabilities." >> $GITHUB_STEP_SUMMARY
+          
+      - name: Generate findings table for action summary
+        uses: aquasecurity/trivy-action@master
+        with:
           scan-type: 'config'
           severity: 'HIGH,CRITICAL'
           ignore-unfixed: true
