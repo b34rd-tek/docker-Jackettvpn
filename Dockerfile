@@ -2,13 +2,6 @@
 
 FROM ubuntu:20.04
 
-LABEL org.opencontainers.image.authors="b34rd_tek <el_barbado@b34rd.tech>" \
-      org.opencontainers.image.documentation="https://github.com/${PACKAGE}/README.md" \
-      org.opencontainers.image.description="${DESCRIPTION}" \
-      org.opencontainers.image.licenses="GPLv3" \
-      org.opencontainers.image.source="https://github.com/${PACKAGE}" \
-      org.opencontainers.image.url="https://hub.docker.com/r/${PACKAGE}/"
-
 ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_DATA_HOME="/config" \
 XDG_CONFIG_HOME="/config"
@@ -39,9 +32,6 @@ RUN apt -y install \
     libunwind8 \
     icu-devtools \
     liblttng-ust0 \
-    #libcurl4 \
-    #liblttng-ust1 \
-    #libssl1.0.0 \
     libkrb5-3 \
     zlib1g \
     tzdata \
