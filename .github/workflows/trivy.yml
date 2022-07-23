@@ -33,13 +33,13 @@ jobs:
           docker build -t docker.io/b34rdtek/jackettopenvpn:${{ github.sha }} .
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.6.0
         with:
           image-ref: 'docker.io/b34rdtek/jackettopenvpn:${{ github.sha }}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
