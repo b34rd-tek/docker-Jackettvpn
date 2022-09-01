@@ -12,8 +12,12 @@ jobs:
           repository-url: ${{ github.server_url }}/${{ github.repository }} # Compiles to https://github.com/aquasecurity/chain-bench-action
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
+      - name: Generate results.json
+        run: |
+             echo ${{ steps.chain-bench.outputs.chain-bench-result }} > results.json
+          
       - name: Attach JSON Results
         uses: actions/upload-artifact@v3
         with:
-          name: results.json
-          path: ${{ steps.chain-bench.outputs.chain-bench-result }}
+          name: Scan Results
+          path: results.json
