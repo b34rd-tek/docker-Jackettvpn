@@ -15,5 +15,5 @@ jobs:
       - name: Attach JSON Results
         uses: actions/upload-artifact@v3
         with:
-          name: results
+          name: results.json
           path: ${{ steps.chain-bench.outputs.chain-bench-result }}
