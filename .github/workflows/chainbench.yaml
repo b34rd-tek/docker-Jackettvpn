@@ -16,7 +16,7 @@ jobs:
         
       - name: Generate JSON Results file
         run: |
-           cat ${{ steps.chain-bench.outputs.chain-bench-result }} > /tmp/results.json
+           echo ${{ steps.chain-bench.outputs.chain-bench-result }} > results.json
       
       - name: Attach JSON Results
         uses: actions/upload-artifact@v3
