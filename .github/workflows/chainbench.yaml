@@ -13,13 +13,16 @@ jobs:
         with:
           repository-url: ${{ github.server_url }}/${{ github.repository }} # Compiles to https://github.com/aquasecurity/chain-bench-action
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Generate JSON Results file
+
+      - name: Echo
         run: |
-          echo ${{ steps.chain-bench.outputs.chain-bench-result }} > /tmp/results.json
+          echo ${{ steps.chain-bench.outputs }}
+#      - name: Generate JSON Results file
+#        run: |
+#          cat ${{ steps.chain-bench.outputs.chain-bench-result }} > /tmp/results.json
       
-      - name: Attach JSON Results
-        uses: actions/upload-artifact@v3
-        with:
-          name: results
-          path: results.json
+#      - name: Attach JSON Results
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: results
+#          path: results.json
