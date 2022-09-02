@@ -60,4 +60,4 @@ jobs:
           format: 'github'
           output: 'dependency-results.sbom.json'
           image-ref: '.'
-          github-pat: '{ TRIVY_PAT }'
+          github-pat: '${{ secrets.TRIVY_PAT }}'
