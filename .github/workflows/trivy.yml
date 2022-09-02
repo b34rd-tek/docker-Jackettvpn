@@ -70,11 +70,14 @@ jobs:
           format: 'template'
           template: '@/contrib/html.tpl'
           output: 'report.html'
-          
+      
+      - name: Set Date
+        run: echo "date="date >> $GITHUB_ENV
+      
       - name: Upload Report
         uses: actions/upload-artifact@v3
         with:
-          name: report
+          name: report-"${{ env.date }}"
           path: report.html
           
   SBOM:
