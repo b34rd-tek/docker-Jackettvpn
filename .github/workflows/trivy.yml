@@ -45,6 +45,32 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
+  
+  HTML-Report:
+    permissions:
+      contents: read
+    name: Generate HTML Report
+    runs-on: "ubuntu-latest"
+    steps:
+      - name : Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Run Trivy Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          severity: 'HIGH,CRITICAL,MEDIUM,LOW,UNKNOWN'
+          ignore-unfixed: true
+          hide-progress: false
+          format: 'template'
+          template: '@/contrib/html.tpl'
+          output: 'report.html'
+          
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          file: report.html
           
   SBOM:
     permissions:
