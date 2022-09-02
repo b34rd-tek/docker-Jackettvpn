@@ -55,7 +55,11 @@ jobs:
       - name : Checkout code
         uses: actions/checkout@v3
         
-      - name: Run Trivy Scanner
+      - name: Build an image from Dockerfile
+        run: |
+          docker build -t docker.io/b34rdtek/jackettopenvpn:${{ github.sha }} .
+
+      - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
