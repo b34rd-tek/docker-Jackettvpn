@@ -77,7 +77,7 @@ jobs:
       - name: Upload Report
         uses: actions/upload-artifact@v3
         with:
-          name: report-"${{ env.date }}"
+          name: report-${{ env.date }}
           path: report.html
           
   SBOM:
