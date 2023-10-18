@@ -1,6 +1,6 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM ubuntu:20.04
+FROM ubuntu:lunar-20231004
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_DATA_HOME="/config" \
