@@ -2,6 +2,11 @@
 
 FROM ubuntu:mantic-20231011
 
+RUN addgroup --system <group>
+RUN adduser --system <user> --ingroup <group>
+USER <user>:<group>
+
+
 ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_DATA_HOME="/config" \
 XDG_CONFIG_HOME="/config"
