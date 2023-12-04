@@ -1,6 +1,6 @@
 # Jackett and OpenVPN, JackettVPN
 
-FROM ubuntu:mantic-20231011
+FROM ubuntu:mantic
 
 RUN addgroup --system <group>
 RUN adduser --system <user> --ingroup <group>
